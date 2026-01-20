@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
-import AboutMe from './AboutMePage';
+import React, { useState} from 'react';
+import AboutMe from './LearnMore';
 import userImage from './assets/profile-img.png';
+import userProfile from './assets/user-image.png';
 import resumePDF from './assets/FELICES-FEBY_CV.pdf';
 import useDarkMode from './useDarkMode';
-import { Sun, Moon } from 'lucide-react';
+
 
 // Import Certificate PDFs
 import ccna1PDF from './assets/CCNA_1.pdf';
@@ -17,7 +18,8 @@ import {
   Mail, Phone, ExternalLink, Globe, Shield, 
   Award, ChevronRight, Zap, Github, Linkedin,
   Heart, Brain, Settings, CheckCircle, FileText, 
-  Trophy, BookOpen, Star, X, Cpu 
+  Trophy, BookOpen, Star, X, Cpu, User,
+  Sun, Moon
 } from 'lucide-react';
 
 function App() {
@@ -61,11 +63,12 @@ function App() {
 
             {/* Right Side Items */}
             <div className="hidden md:flex gap-8 text-sm font-bold uppercase tracking-widest text-slate-600 dark:text-slate-300 items-center">
-              <a href="#about" className="hover:text-rose-500 dark:hover:text-rose-400 transition-colors">About</a>
+              <a href="#home" className="hover:text-rose-500 dark:hover:text-rose-400 transition-colors">Home</a>
+              <a href="#about-me" className="hover:text-rose-500 dark:hover:text-rose-400 transition-colors">About</a>
               <a href="#skills" className="hover:text-rose-500 dark:hover:text-rose-400 transition-colors">Skills</a>
               <a href="#awards" className="hover:text-rose-500 dark:hover:text-rose-400 transition-colors">Awards</a>
               <a href="#projects" className="hover:text-rose-500 dark:hover:text-rose-400 transition-colors">Projects</a>
-              {/* Contact Button */}
+                {/* Contact Button */}
               <a 
                 href="#contact" 
                 className="bg-rose-500 text-white px-6 py-2.5 rounded-full hover:bg-rose-600 transition-all shadow-lg shadow-rose-200 dark:shadow-none active:scale-95"
@@ -87,7 +90,7 @@ function App() {
         </nav>
 
       {/* Hero Section */}
-      <header id="about" className="pt-48 pb-24 px-6 max-w-7xl mx-auto flex flex-col lg:flex-row-reverse items-center gap-16">
+      <header id="home" className="pt-48 pb-24 px-6 max-w-7xl mx-auto flex flex-col lg:flex-row-reverse items-center gap-16">
         <div className="flex-1 text-center lg:text-left">
           <div className="inline-block px-4 py-1 mb-6 text-xs font-bold tracking-widest text-rose-600 bg-rose-50 rounded-full uppercase border border-rose-100">
             4th Year BSIT Student @ BukSU
@@ -99,12 +102,7 @@ function App() {
           <p className="text-lg md:text-xl text-slate-500 dark:text-slate-400 font-medium max-w-2xl leading-relaxed mb-10">
           Highly skilled in <span className="text-slate-900 dark:text-white border-b-4 border-rose-200">Full-Stack Development</span>, 
           QA, and Project Management.
-            <button 
-              onClick={() => setIsAboutPage(true)} // <--- TRIGGER SWITCH
-              className="ml-2 text-rose-500 font-bold hover:text-rose-600 hover:underline inline-flex items-center gap-1 transition-all"
-            >
-              Learn more about me <ChevronRight size={18} />
-            </button>
+            
           </p>
           <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
             <a href={resumePDF} download className="flex items-center gap-3 bg-slate-900 text-white px-8 py-4 rounded-2xl font-bold hover:scale-105 transition-all shadow-xl group">
@@ -115,24 +113,128 @@ function App() {
             </a>
           </div>
         </div>
+        {/* Hero Circular Portrait */}
         <div className="flex-1 flex justify-center lg:justify-start relative">
           <div className="relative w-72 h-72 md:w-96 md:h-96">
-            <div className="absolute inset-0 bg-rose-400/20 rounded-[3rem] blur-3xl -z-10 animate-pulse" />
-            <div className="w-full h-full rounded-[3.5rem] p-3 border-2 border-rose-100 bg-white shadow-2xl -rotate-2 hover:rotate-0 transition-transform duration-500">
-              <div className="w-full h-full rounded-[2.8rem] overflow-hidden bg-rose-50 border border-rose-100">
-                <img src={userImage} alt="Feby Angela Felices" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" />
-              </div>
+            <div className="absolute inset-0 bg-rose-400/20 rounded-full blur-3xl -z-10 animate-pulse" />
+            <div className="w-full h-full rounded-full p-3 border-2 border-dashed border-rose-200 dark:border-slate-800 animate-[spin_20s_linear_infinite]" />
+            <div className="absolute inset-3 rounded-full overflow-hidden bg-white dark:bg-slate-900 shadow-2xl border-4 border-white dark:border-slate-800">
+               <img 
+                 src={userImage} 
+                 alt="Feby Angela" 
+                 className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 hover:scale-110" 
+               />
             </div>
-            <div className="absolute -bottom-6 -right-6 bg-white p-4 rounded-2xl shadow-xl border border-rose-50 flex items-center gap-3 animate-bounce">
+            <div className="absolute -bottom-2 -right-2 bg-white dark:bg-slate-800 p-4 rounded-2xl shadow-xl border border-rose-50 dark:border-slate-700 flex items-center gap-3 animate-bounce z-20">
               <div className="p-2 bg-rose-500 rounded-lg text-white"><Award size={20} /></div>
-              <p className="text-xs font-black text-slate-800">Full Stack & Project Manager</p>
+              <p className="text-xs font-black text-slate-800 dark:text-white">Full Stack & Project Manager</p>
             </div>
           </div>
         </div>
       </header>
 
-      {/* Skills Section */}
-      <section id="skills" className="py-24 px-6 max-w-7xl mx-auto">
+{/* Aesthetic About Me Section */}
+<section id="about-me" className="py-32 px-6 max-w-7xl mx-auto scroll-mt-20">
+  <div className="relative">
+    {/* Swapped order: Text on top for mobile (reverse), Portrait on right for desktop */}
+    <div className="flex flex-col-reverse lg:flex-row items-center gap-12 lg:gap-0">
+      
+      {/* Left Side: Content Area (No card background/border) */}
+      <div className="lg:w-3/5 py-10 lg:pr-20 flex flex-col justify-center relative z-20 text-left">
+        <div className="space-y-2 mb-8">
+          <p className="text-rose-500 font-black uppercase tracking-[0.4em] text-[10px]">Biographical</p>
+          <h2 className="text-5xl md:text-6xl font-black text-slate-900 dark:text-white leading-tight">
+            Behind the <span className="italic font-serif text-rose-500">Code.</span>
+          </h2>
+        </div>
+
+        <p className="text-xl text-slate-600 dark:text-slate-300 leading-relaxed mb-10 max-w-xl">
+          I am a 4th-year IT student at <span className="text-slate-900 dark:text-white font-bold underline decoration-rose-500/30 decoration-4">Bukidnon State University</span>. 
+          I specialize in bridging technical logic with human-centered design. 
+          I don't just build software; I engineer <span className="text-rose-500 font-medium">reliable experiences</span>.
+        </p>
+
+        {/* Minimalist Info Grid */}
+        <div className="grid grid-cols-2 gap-12 text-left">
+          <div className="space-y-1">
+            <p className="text-[10px] font-black uppercase text-slate-400 tracking-widest">Current Role</p>
+            <p className="text-slate-900 dark:text-slate-100 font-bold text-lg leading-tight">BSIT Senior Student</p>
+          </div>
+          <div className="space-y-1">
+            <p className="text-[10px] font-black uppercase text-slate-400 tracking-widest">Core Focus</p>
+            <p className="text-slate-900 dark:text-slate-100 font-bold text-lg leading-tight">Full-Stack & PM</p>
+          </div>
+        </div>
+
+        {/* --- SELF-ANIMATING "LEARN MORE" BUTTON --- */}
+        <div className="mt-20">
+          <button 
+            onClick={() => setIsAboutPage(true)}
+            className="group relative inline-flex items-center gap-6 text-slate-900 dark:text-white font-black uppercase tracking-[0.2em] text-[10px] transition-all duration-500"
+          >
+            <div className="relative flex items-center justify-center">
+              {/* Breathing Line Animation (Defined in CSS) */}
+              <span className="h-[1px] bg-rose-500 animate-breathe group-hover:animate-none group-hover:w-24 group-hover:bg-rose-600 transition-all duration-500 ease-out"></span>
+              <span className="absolute -right-1 w-3 h-3 bg-rose-500/20 rounded-full animate-ping"></span>
+              <span className="absolute -right-1 w-1.5 h-1.5 bg-rose-500 rounded-full shadow-[0_0_10px_rgba(244,63,94,0.8)]"></span>
+            </div>
+            
+            <span className="relative overflow-hidden group-hover:translate-x-2 group-hover:text-rose-500 transition-all duration-500 ease-out">
+              <span className="relative z-10">Learn More</span>
+              <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-rose-400/20 to-transparent -translate-x-full animate-[shimmer_4s_infinite] pointer-events-none"></span>
+            </span>
+          </button>
+        </div>
+      </div>
+
+      {/* Right Side: OVERLAPPING Portrait Area */}
+      <div className="lg:w-2/5 relative flex items-center justify-center lg:justify-end lg:pr-12">
+        
+        {/* Animated Glow behind the floating person */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-rose-500/10 dark:bg-rose-500/5 rounded-full blur-[120px] animate-pulse pointer-events-none" />
+
+        <div className="relative z-30 group lg:pointer-events-auto pointer-events-none">
+          {/* THE IMAGE: Pops out of the section flow */}
+          <img 
+            src={userProfile} 
+            alt="Feby Angela" 
+            className="w-auto h-[500px] md:h-[620px] object-contain drop-shadow-[0_30px_60px_rgba(0,0,0,0.15)] 
+                       transition-all duration-1000 cubic-bezier(0.4, 0, 0.2, 1)
+                       group-hover:scale-[1.05] group-hover:-translate-y-8 lg:-mt-24
+                       grayscale-[30%] group-hover:grayscale-0" 
+          />
+          
+          {/* Floating status tag - Located at Bottom Right */}
+          <div className="absolute bottom-20 -right-6 lg:-right-10 z-40 transition-all duration-1000 group-hover:-translate-y-12 group-hover:-translate-x-4">
+            <div className="flex items-center gap-3 bg-white/10 dark:bg-black/40 backdrop-blur-xl border border-white/20 px-5 py-3 rounded-2xl shadow-2xl">
+              <div className="relative flex h-2 w-2">
+                <div className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></div>
+                <div className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></div>
+              </div>
+              <p className="text-[9px] font-black text-white uppercase tracking-[0.2em]">Ready to Work</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div className="relative h-12 flex justify-center items-center pointer-events-none -my-4">
+  {/* A very short vertical guide line */}
+  <div className="w-px h-full bg-gradient-to-b from-rose-500/50 to-transparent" />
+</div>
+
+
+    {/* Skills Section - Reduced top padding to "connect" it */}
+    <section id="skills" className="pt-0 pb-24 px-6 max-w-7xl mx-auto">
+    <div className="flex items-center gap-4 mb-10">
+      <div className="h-px w-8 bg-rose-500/50" />
+      <span className="text-[10px] font-black uppercase tracking-[0.3em] text-rose-500/70">
+        Technical Toolkit
+      </span>
+    </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <div className="bg-white p-10 rounded-[3rem] border border-rose-50 shadow-sm">
             <div className="flex items-center gap-4 mb-8">
