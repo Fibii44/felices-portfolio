@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import AboutMe from './AboutMePage';
 import userImage from './assets/profile-img.png';
 import resumePDF from './assets/FELICES-FEBY_CV.pdf';
+import useDarkMode from './useDarkMode';
+import { Sun, Moon } from 'lucide-react';
 
 // Import Certificate PDFs
 import ccna1PDF from './assets/CCNA_1.pdf';
@@ -20,8 +22,9 @@ import {
 
 function App() {
   const [selectedCert, setSelectedCert] = useState(null);
+  const [colorTheme, setTheme] = useDarkMode();
   const [isAboutPage, setIsAboutPage] = useState(false);
-
+  
   const totalSteps = 3;
 
   const certFiles = {
@@ -40,7 +43,7 @@ function App() {
 
 
   return (
-    <div className="min-h-screen bg-[#fffafa] text-slate-800 font-sans scroll-smooth overflow-x-hidden">
+    <div className="min-h-screen bg-[#fffafa] dark:bg-slate-950 text-slate-800 dark:text-slate-200 font-sans scroll-smooth transition-colors duration-500 overflow-x-hidden">
       {/* Dynamic Background Blur */}
       <div className="fixed top-0 left-0 w-full h-full -z-10 overflow-hidden pointer-events-none">
         <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-pink-200/40 rounded-full blur-[120px]" />
@@ -48,26 +51,40 @@ function App() {
       </div>
 
       {/* Navbar */}
-      <nav className="fixed w-full bg-white/70 backdrop-blur-md shadow-sm z-50 border-b border-pink-100">
-        <div className="max-w-7xl mx-auto px-8 py-4 flex justify-between items-center">
-          <span className="font-black text-2xl tracking-tighter text-slate-900">
-            FEBY<span className="text-rose-500">.</span>
-          </span>
-          
-          <div className="hidden md:flex gap-10 text-sm font-bold uppercase tracking-widest text-slate-600 items-center">
-            <a href="#about" className="hover:text-rose-500 transition-colors">About</a>
-            <a href="#skills" className="hover:text-rose-500 transition-colors">Skills</a>
-            <a href="#awards" className="hover:text-rose-500 transition-colors">Awards</a>
-            <a href="#projects" className="hover:text-rose-500 transition-colors">Projects</a>
-            <a 
-              href="#contact" 
-              className="bg-rose-500 text-white px-6 py-2.5 rounded-full hover:bg-rose-600 transition-all shadow-lg shadow-rose-200 active:scale-95"
-            >
-              Contact
-            </a>
+        <nav className="fixed w-full bg-white/70 dark:bg-slate-900/70 backdrop-blur-md shadow-sm z-50 border-b border-pink-100 dark:border-slate-800 transition-colors duration-300">
+          <div className="max-w-7xl mx-auto px-8 py-4 flex justify-between items-center">
+            
+            {/* Logo */}
+            <span className="font-black text-2xl tracking-tighter text-slate-900 dark:text-white">
+              FEBY<span className="text-rose-500">.</span>
+            </span>
+
+            {/* Right Side Items */}
+            <div className="hidden md:flex gap-8 text-sm font-bold uppercase tracking-widest text-slate-600 dark:text-slate-300 items-center">
+              <a href="#about" className="hover:text-rose-500 dark:hover:text-rose-400 transition-colors">About</a>
+              <a href="#skills" className="hover:text-rose-500 dark:hover:text-rose-400 transition-colors">Skills</a>
+              <a href="#awards" className="hover:text-rose-500 dark:hover:text-rose-400 transition-colors">Awards</a>
+              <a href="#projects" className="hover:text-rose-500 dark:hover:text-rose-400 transition-colors">Projects</a>
+              {/* Contact Button */}
+              <a 
+                href="#contact" 
+                className="bg-rose-500 text-white px-6 py-2.5 rounded-full hover:bg-rose-600 transition-all shadow-lg shadow-rose-200 dark:shadow-none active:scale-95"
+              >
+                Contact
+              </a>
+
+              {/* Dark Mode Toggle Button - Integrated into Nav */}
+              <button 
+                onClick={() => setTheme(colorTheme)}
+                className="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-yellow-400 hover:scale-110 transition-all active:scale-95 border border-slate-200 dark:border-slate-700"
+                aria-label="Toggle Dark Mode"
+              >
+                {colorTheme === 'light' ? <Sun size={20} /> : <Moon size={20} />}
+              </button>
+
+            </div>
           </div>
-        </div>
-      </nav>
+        </nav>
 
       {/* Hero Section */}
       <header id="about" className="pt-48 pb-24 px-6 max-w-7xl mx-auto flex flex-col lg:flex-row-reverse items-center gap-16">
@@ -75,13 +92,13 @@ function App() {
           <div className="inline-block px-4 py-1 mb-6 text-xs font-bold tracking-widest text-rose-600 bg-rose-50 rounded-full uppercase border border-rose-100">
             4th Year BSIT Student @ BukSU
           </div>
-          <h1 className="text-6xl md:text-7xl font-black mb-6 tracking-tight text-slate-900 leading-tight">
+          <h1 className="text-6xl md:text-7xl font-black mb-6 tracking-tight text-slate-900 dark:text-white leading-tight">
             FEBY ANGELA <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-rose-500 to-pink-400">FELICES</span>
           </h1>
-          <p className="text-lg md:text-xl text-slate-500 font-medium max-w-2xl leading-relaxed mb-10">
-            Highly skilled in <span className="text-slate-900 border-b-4 border-rose-200">Full-Stack Development</span>, 
-            QA, and Project Management. 
+          <p className="text-lg md:text-xl text-slate-500 dark:text-slate-400 font-medium max-w-2xl leading-relaxed mb-10">
+          Highly skilled in <span className="text-slate-900 dark:text-white border-b-4 border-rose-200">Full-Stack Development</span>, 
+          QA, and Project Management.
             <button 
               onClick={() => setIsAboutPage(true)} // <--- TRIGGER SWITCH
               className="ml-2 text-rose-500 font-bold hover:text-rose-600 hover:underline inline-flex items-center gap-1 transition-all"
@@ -149,11 +166,11 @@ function App() {
 
       {/* Awards & Certifications Section */}
       <section id="awards" className="py-24 px-6 max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-rose-500 font-bold uppercase tracking-widest text-sm mb-2">Recognition</h2>
-          <h3 className="text-4xl font-black text-slate-900 mb-4">Certifications & Awards</h3>
-          <div className="h-1.5 w-24 bg-rose-500 mx-auto rounded-full" />
-        </div>
+      <div className="text-center mb-16">
+        <h2 className="text-rose-500 font-bold uppercase tracking-widest text-sm mb-2">Recognition</h2>
+        <h3 className="text-4xl font-black text-slate-900 dark:text-white mb-4 transition-colors">Certifications & Awards</h3>
+        <div className="h-1.5 w-24 bg-rose-500 mx-auto rounded-full" />
+      </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
           <div className="flex items-start gap-6 p-8 bg-white rounded-3xl border border-rose-100 hover:shadow-xl hover:shadow-rose-100 transition-all group">
@@ -235,7 +252,7 @@ function App() {
       <footer id="contact" className="py-24 px-6 text-center relative overflow-hidden">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-rose-100/30 rounded-full blur-[100px] -z-10" />
         
-        <h3 className="text-5xl font-black mb-12 text-slate-900 tracking-tighter">
+        <h3 className="text-5xl font-black mb-12 text-slate-900 dark:text-white tracking-tighter transition-colors">
           Let's <span className="text-rose-500 underline decoration-rose-200 decoration-8 underline-offset-8">Connect</span>
         </h3>
 

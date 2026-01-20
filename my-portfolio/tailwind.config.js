@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: 'class', 
   content: [
     "./index.html",
     "./src/**/*.{js,jsx,ts,tsx}",
@@ -7,7 +8,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'buksu-blue': '#0038a8', // Representing Bukidnon State University [cite: 77]
+        'buksu-blue': '#0038a8',
       },
     },
   },
