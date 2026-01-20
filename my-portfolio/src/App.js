@@ -1,26 +1,29 @@
 import React, { useState } from 'react';
+import AboutMe from './AboutMePage';
 import userImage from './assets/profile-img.png';
 import resumePDF from './assets/FELICES-FEBY_CV.pdf';
 
-// Import Certificate PDFs from src/assets
+// Import Certificate PDFs
 import ccna1PDF from './assets/CCNA_1.pdf';
 import ccna2PDF from './assets/CCNA_2.pdf';
 import ccna3PDF from './assets/CCNA_3.pdf';
 import cyberPDF from './assets/Cybersecurity.pdf';
-import digiPDF from './assets/digi.pdf'; // New DICT PDF
-import dictPDF from './assets/dict.pdf'; // New Special Training PDF
+import digiPDF from './assets/digi.pdf';
+import dictPDF from './assets/dict.pdf';
 
 import { 
   Mail, Phone, ExternalLink, Globe, Shield, 
-  Award, ChevronRight, Zap, 
+  Award, ChevronRight, Zap, Github, Linkedin,
   Heart, Brain, Settings, CheckCircle, FileText, 
-  Trophy, BookOpen, Star, X 
+  Trophy, BookOpen, Star, X, Cpu 
 } from 'lucide-react';
 
 function App() {
   const [selectedCert, setSelectedCert] = useState(null);
+  const [isAboutPage, setIsAboutPage] = useState(false);
 
-  // Map labels to the IMPORTED PDF variables
+  const totalSteps = 3;
+
   const certFiles = {
     "Introduction to Networks (CCNA 1)": ccna1PDF,
     "Switching, Routing, and Wireless (CCNA 2)": ccna2PDF,
@@ -29,6 +32,12 @@ function App() {
     "Digital Literacy Training": digiPDF,
     "DICT Special Technical Training": dictPDF,
   };
+
+  // --- LOGIC TO SWITCH TO ABOUT ME PAGE ---
+  if (isAboutPage) {
+    return <AboutMe onBack={() => setIsAboutPage(false)} />;
+  }
+
 
   return (
     <div className="min-h-screen bg-[#fffafa] text-slate-800 font-sans scroll-smooth overflow-x-hidden">
@@ -39,16 +48,24 @@ function App() {
       </div>
 
       {/* Navbar */}
-      <nav className="fixed w-full bg-white/70 backdrop-blur-md shadow-sm z-50 px-8 py-4 flex justify-between items-center border-b border-pink-100">
-        <span className="font-black text-2xl tracking-tighter text-slate-900">
-          FEBY<span className="text-rose-500">.</span>
-        </span>
-        <div className="hidden md:flex gap-10 text-sm font-bold uppercase tracking-widest text-slate-600">
-          <a href="#about" className="hover:text-rose-500 transition-colors">About</a>
-          <a href="#skills" className="hover:text-rose-500 transition-colors">Skills</a>
-          <a href="#awards" className="hover:text-rose-500 transition-colors">Awards</a>
-          <a href="#projects" className="hover:text-rose-500 transition-colors">Projects</a>
-          <a href="#contact" className="bg-rose-500 text-white px-5 py-2 rounded-full hover:bg-rose-600 transition-all shadow-lg shadow-rose-200">Contact</a>
+      <nav className="fixed w-full bg-white/70 backdrop-blur-md shadow-sm z-50 border-b border-pink-100">
+        <div className="max-w-7xl mx-auto px-8 py-4 flex justify-between items-center">
+          <span className="font-black text-2xl tracking-tighter text-slate-900">
+            FEBY<span className="text-rose-500">.</span>
+          </span>
+          
+          <div className="hidden md:flex gap-10 text-sm font-bold uppercase tracking-widest text-slate-600 items-center">
+            <a href="#about" className="hover:text-rose-500 transition-colors">About</a>
+            <a href="#skills" className="hover:text-rose-500 transition-colors">Skills</a>
+            <a href="#awards" className="hover:text-rose-500 transition-colors">Awards</a>
+            <a href="#projects" className="hover:text-rose-500 transition-colors">Projects</a>
+            <a 
+              href="#contact" 
+              className="bg-rose-500 text-white px-6 py-2.5 rounded-full hover:bg-rose-600 transition-all shadow-lg shadow-rose-200 active:scale-95"
+            >
+              Contact
+            </a>
+          </div>
         </div>
       </nav>
 
@@ -64,10 +81,16 @@ function App() {
           </h1>
           <p className="text-lg md:text-xl text-slate-500 font-medium max-w-2xl leading-relaxed mb-10">
             Highly skilled in <span className="text-slate-900 border-b-4 border-rose-200">Full-Stack Development</span>, 
-            QA, and Network Engineering. A problem-solver dedicated to continuous learning.
+            QA, and Project Management. 
+            <button 
+              onClick={() => setIsAboutPage(true)} // <--- TRIGGER SWITCH
+              className="ml-2 text-rose-500 font-bold hover:text-rose-600 hover:underline inline-flex items-center gap-1 transition-all"
+            >
+              Learn more about me <ChevronRight size={18} />
+            </button>
           </p>
           <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
-            <a href={resumePDF} download="FELICES-FEBY_CV.pdf" className="flex items-center gap-3 bg-slate-900 text-white px-8 py-4 rounded-2xl font-bold hover:scale-105 transition-all shadow-xl shadow-slate-200 group">
+            <a href={resumePDF} download className="flex items-center gap-3 bg-slate-900 text-white px-8 py-4 rounded-2xl font-bold hover:scale-105 transition-all shadow-xl group">
               <FileText size={18} className="text-rose-400" /> Download Resume
             </a>
             <a href={resumePDF} target="_blank" rel="noreferrer" className="flex items-center gap-3 border-2 border-rose-100 bg-white/50 px-8 py-4 rounded-2xl font-bold hover:border-rose-400 hover:text-rose-600 transition-all">
@@ -75,7 +98,6 @@ function App() {
             </a>
           </div>
         </div>
-
         <div className="flex-1 flex justify-center lg:justify-start relative">
           <div className="relative w-72 h-72 md:w-96 md:h-96">
             <div className="absolute inset-0 bg-rose-400/20 rounded-[3rem] blur-3xl -z-10 animate-pulse" />
@@ -86,7 +108,7 @@ function App() {
             </div>
             <div className="absolute -bottom-6 -right-6 bg-white p-4 rounded-2xl shadow-xl border border-rose-50 flex items-center gap-3 animate-bounce">
               <div className="p-2 bg-rose-500 rounded-lg text-white"><Award size={20} /></div>
-              <p className="text-xs font-black text-slate-800">Full Stack & QA Specialist</p>
+              <p className="text-xs font-black text-slate-800">Full Stack & Project Manager</p>
             </div>
           </div>
         </div>
@@ -192,18 +214,37 @@ function App() {
         </div>
       </section>
 
-      {/* Footer */}
+     {/* Navbar - Centered and Aligned */}
+     <nav className="fixed w-full bg-white/70 backdrop-blur-md shadow-sm z-50 border-b border-pink-100">
+        <div className="max-w-7xl mx-auto px-8 py-4 flex justify-between items-center">
+          <span className="font-black text-2xl tracking-tighter text-slate-900">
+            FEBY<span className="text-rose-500">.</span>
+          </span>
+          
+          <div className="hidden md:flex gap-10 text-sm font-bold uppercase tracking-widest text-slate-600 items-center">
+            <a href="#about" className="hover:text-rose-500 transition-colors">About</a>
+            <a href="#skills" className="hover:text-rose-500 transition-colors">Skills</a>
+            <a href="#awards" className="hover:text-rose-500 transition-colors">Awards</a>
+            <a href="#projects" className="hover:text-rose-500 transition-colors">Projects</a>
+            <a href="#contact" className="bg-rose-500 text-white px-6 py-2.5 rounded-full hover:bg-rose-600 transition-all shadow-lg shadow-rose-200 active:scale-95">Contact</a>
+          </div>
+        </div>
+      </nav>
+
+      {/* Footer - With Social Links */}
       <footer id="contact" className="py-24 px-6 text-center relative overflow-hidden">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-rose-100/30 rounded-full blur-[100px] -z-10" />
+        
         <h3 className="text-5xl font-black mb-12 text-slate-900 tracking-tighter">
           Let's <span className="text-rose-500 underline decoration-rose-200 decoration-8 underline-offset-8">Connect</span>
         </h3>
 
-        <div className="flex flex-col lg:flex-row justify-center items-center gap-12 mb-20">
+        {/* Contact Links */}
+        <div className="flex flex-col lg:flex-row justify-center items-center gap-12 mb-16">
           <div className="flex flex-col md:flex-row gap-8 items-center">
             <a href="tel:09944450774" className="flex items-center gap-4 hover:text-rose-500 transition-all group scale-100 hover:scale-105">
               <div className="relative">
-                <div className="p-4 bg-rose-50 rounded-2xl group-hover:bg-rose-500 group-hover:text-white transition-all duration-300 shadow-sm">
+                <div className="p-4 bg-rose-50 rounded-2xl group-hover:bg-rose-500 group-hover:text-white transition-all duration-300">
                   <Phone size={24} className="text-rose-500 group-hover:text-white" />
                 </div>
                 <span className="absolute -top-2 -right-2 bg-slate-900 text-white text-[10px] px-2 py-0.5 rounded-full font-black tracking-widest uppercase">DITO</span>
@@ -214,9 +255,9 @@ function App() {
               </div>
             </a>
 
-            <a href="tel:09161234567" className="flex items-center gap-4 hover:text-rose-500 transition-all group scale-100 hover:scale-105">
+            <a href="tel:09551593904" className="flex items-center gap-4 hover:text-rose-500 transition-all group scale-100 hover:scale-105">
               <div className="relative">
-                <div className="p-4 bg-rose-50 rounded-2xl group-hover:bg-rose-500 group-hover:text-white transition-all duration-300 shadow-sm">
+                <div className="p-4 bg-rose-50 rounded-2xl group-hover:bg-rose-500 group-hover:text-white transition-all duration-300">
                   <Phone size={24} className="text-rose-500 group-hover:text-white" />
                 </div>
                 <span className="absolute -top-2 -right-2 bg-slate-900 text-white text-[10px] px-2 py-0.5 rounded-full font-black tracking-widest uppercase">TM</span>
@@ -231,13 +272,38 @@ function App() {
           <div className="hidden lg:block w-px h-12 bg-slate-200" />
 
           <a href="mailto:2201102089@student.buksu.edu.ph" className="flex items-center gap-4 hover:text-rose-500 transition-all group scale-100 hover:scale-105">
-            <div className="p-4 bg-rose-50 rounded-2xl group-hover:bg-rose-500 group-hover:text-white transition-all duration-300 shadow-sm">
+            <div className="p-4 bg-rose-50 rounded-2xl group-hover:bg-rose-500 group-hover:text-white transition-all duration-300">
               <Mail size={24} className="text-rose-500 group-hover:text-white" />
             </div>
             <div className="text-left">
               <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">Send an email</p>
-              <p className="text-xl font-bold text-sm md:text-xl">2201102089@student.buksu.edu.ph</p>
+              <p className="text-xl font-bold">2201102089@student.buksu.edu.ph</p>
             </div>
+          </a>
+        </div>
+
+        {/* --- OFFICIAL BRAND SOCIAL LINKS --- */}
+        <div className="flex flex-wrap justify-center gap-6 mb-20">
+          {/* GitHub - Professional Dark Style */}
+          <a 
+            href="https://github.com/Fibii44" 
+            target="_blank" 
+            rel="noreferrer"
+            className="flex items-center gap-3 bg-slate-900 text-white px-8 py-4 rounded-2xl font-bold hover:bg-black transition-all hover:-translate-y-2 shadow-xl shadow-slate-200 group"
+          >
+            <Github size={22} className="group-hover:scale-110 transition-transform" /> 
+            <span>GitHub</span>
+          </a>
+
+          {/* LinkedIn - Official Blue Style */}
+          <a 
+            href="https://www.linkedin.com/in/feby-angela-felices-4b288b394/" 
+            target="_blank" 
+            rel="noreferrer"
+            className="flex items-center gap-3 bg-[#0077b5] text-white px-8 py-4 rounded-2xl font-bold hover:bg-[#005a87] transition-all hover:-translate-y-2 shadow-xl shadow-blue-100 group"
+          >
+            <Linkedin size={22} className="group-hover:scale-110 transition-transform" /> 
+            <span>LinkedIn</span>
           </a>
         </div>
 

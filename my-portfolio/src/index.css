@@ -7,10 +7,29 @@
   50% { transform: translateY(-2px); }
 }
 
+@keyframes bounce-subtle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
 .animate-bounce-subtle {
   animation: bounce-subtle 2s infinite ease-in-out;
 }
 
+/* Tailwind base transitions for animate-in classes */
+.animate-in {
+  animation-duration: 500ms;
+  animation-fill-mode: both;
+}
+
+@keyframes slide-in-bottom {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+.slide-in-from-bottom {
+  animation-name: slide-in-bottom;
+}
 /* Smooth scrolling for your navigation links */
 html {
   scroll-behavior: smooth;
