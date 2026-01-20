@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/my-portfolio/static/css/main.6fb87019.css",
+    "main.js": "/my-portfolio/static/js/main.87096e33.js",
+    "static/js/453.15a626a8.chunk.js": "/my-portfolio/static/js/453.15a626a8.chunk.js",
+    "static/media/profile-img.png": "/my-portfolio/static/media/profile-img.aa9ffdfb7b1ba8b891cb.png",
+    "static/media/FELICES-FEBY_CV.pdf": "/my-portfolio/static/media/FELICES-FEBY_CV.03b1bc2f4a2ebf765d38.pdf",
+    "index.html": "/my-portfolio/index.html",
+    "main.6fb87019.css.map": "/my-portfolio/static/css/main.6fb87019.css.map",
+    "main.87096e33.js.map": "/my-portfolio/static/js/main.87096e33.js.map",
+    "453.15a626a8.chunk.js.map": "/my-portfolio/static/js/453.15a626a8.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6fb87019.css",
+    "static/js/main.87096e33.js"
+  ]
+}
